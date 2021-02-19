@@ -1,4 +1,14 @@
 const inquirer = require('inquirer');
+const fs = require('fs');
+const { Manager } = require('./lib/employee');
+const { Engineer } = require('./lib/employee');
+const { Intern } = require('./lib/employee');
+
+
+
+
+
+var output = [];
 
 const questions = [
     {
@@ -26,13 +36,116 @@ const questions = [
         name: 'employeeType',
         message: 'Which type of team member would you like to add?',
         choices: ['Intern', 'Engineer', "I don't want to add any more team members"],
+    }
+];
+
+
+const intern = [
+    {
+        type: 'input',
+        name: 'internName',
+        message: "What is the Intern's Name?"
     },
-]
+    {
+        type: 'input',
+        name: 'internId',
+        message: "What is the Intern's id?"
+    },
+    {
+        type: 'input',
+        name: 'internEmail',
+        message: "What is the Intern's Email?"
+    },
+    {
+        type: 'input',
+        name: 'internSchool',
+        message: "Where does the intern go to school?"
+    },
+    {
+        type: 'list',
+        name: 'employeeType',
+        message: 'Which type of team member would you like to add?',
+        choices: ['Intern', 'Engineer', "I don't want to add any more team members"],
+    }
+];
+
+const engineer = [
+    {
+        type: 'input',
+        name: 'engineerName',
+        message: "What is the Engineer's Name?"
+    },
+    {
+        type: 'input',
+        name: 'engineerId',
+        message: "What is the Engineer's id?"
+    },
+    {
+        type: 'input',
+        name: 'engineerEmail',
+        message: "What is the Engineer's Email?"
+    },
+    {
+        type: 'input',
+        name: 'engineerGithub',
+        message: "What is the Engineer's github?"
+    },
+    {
+        type: 'list',
+        name: 'employeeType',
+        message: 'Which type of team member would you like to add?',
+        choices: ['Intern', 'Engineer', "I don't want to add any more team members"],
+    }
+    
+];
+
 
 function init(questions) {
     inquirer.prompt(questions).then(answers => {
-        
-})
+        output.push(answers)
+        if (answers.employeeType === "Intern") {
+            classQuestions(intern);
+        }
+        else if (answers.employeeType === "Engineer") {
+            classQuestions(engineer);
+        }
+        else {
+            newMember = new Manager(output[0].managerName, output[0].managerId, output[0].managerEmail, output[0].managerOffice)
+            console.log(newMember);
+        }   
+    })
+}
+
+function classQuestions(questions) {
+    inquirer.prompt(questions).then(classAnswers => {
+        output.push(classAnswers);
+        if (classAnswers.employeeType === "Intern" ) {
+            classQuestions(intern);
+        }
+        else if (classAnswers.employeeType === "Engineer") {
+            classQuestions(engineer);
+        }
+        else {
+            let newMember;
+            let employeeList = [];
+            for (let i = 0; i < output.length; i++) {
+                if(output[i].managerName) {
+                    newMember = new Manager(output[i].managerName, output[i].managerId, output[i].managerEmail, output[i].managerOffice)
+                    employeeList.push(newMember);
+                }
+                else if(output[i].internName) {
+                    newMember = new Intern(output[i].internName, output[i].internId, output[i].internEmail, output[i].internSchool)
+                    employeeList.push(newMember);
+                }
+                else if(output[i].engineerName) {
+                    newMember = new Engineer(output[i].engineerName, output[i].engineerId, output[i].engineerEmail, output[i].engineerGithub)
+                    employeeList.push(newMember);
+                }
+                
+            }
+            console.log(employeeList);
+        }
+    })
 }
 
 init(questions);
