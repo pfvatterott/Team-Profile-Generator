@@ -3,6 +3,8 @@ const fs = require('fs');
 const { Manager } = require('./lib/employee');
 const { Engineer } = require('./lib/employee');
 const { Intern } = require('./lib/employee');
+const createHTML = require('./src/page-template');
+
 
 
 
@@ -143,9 +145,18 @@ function classQuestions(questions) {
                 }
                 
             }
-            console.log(employeeList);
+            console.log(employeeList[0]);
+            writeHTML(employeeList)
+            // seems like the html will be generated here.
         }
     })
 }
 
+function writeHTML(employeeList) {
+    fs.writeFile('index.html', createHTML(employeeList), (err) => 
+    err ? console.error(err) : console.log('Your UserREADME has been created!'))
+};
+
+
 init(questions);
+
