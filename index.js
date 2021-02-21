@@ -5,11 +5,6 @@ const { Engineer } = require('./lib/employee');
 const { Intern } = require('./lib/employee');
 const createHTML = require('./src/page-template');
 
-
-
-
-
-
 var output = [];
 
 const questions = [
@@ -50,7 +45,6 @@ const questions = [
         choices: ['Intern', 'Engineer', "I don't want to add any more team members"],
     }
 ];
-
 
 const intern = [
     {
@@ -131,8 +125,8 @@ const engineer = [
     
 ];
 
-
 function init(questions) {
+    console.log("Let's build your team! First, let's start with the manager.")
     inquirer.prompt(questions).then(answers => {
         output.push(answers)
         if (answers.employeeType === "Intern") {
@@ -142,8 +136,10 @@ function init(questions) {
             classQuestions(engineer);
         }
         else {
+            let employeeList = [];
             newMember = new Manager(output[0].managerName, output[0].managerId, output[0].managerEmail, output[0].managerOffice)
-            console.log(newMember);
+            employeeList.push(newMember);
+            writeHTML(employeeList);
         }   
     })
 }
@@ -173,9 +169,7 @@ function classQuestions(questions) {
                     newMember = new Engineer(output[i].engineerName, output[i].engineerId, output[i].engineerEmail, output[i].engineerGithub)
                     employeeList.push(newMember);
                 }
-                
             }
-            console.log(employeeList[0]);
             writeHTML(employeeList)
             // seems like the html will be generated here.
         }
@@ -183,8 +177,8 @@ function classQuestions(questions) {
 }
 
 function writeHTML(employeeList) {
-    fs.writeFile('index.html', createHTML(employeeList), (err) => 
-    err ? console.error(err) : console.log('Your UserREADME has been created!'))
+    fs.writeFile('./dist/index.html', createHTML(employeeList), (err) => 
+    err ? console.error(err) : console.log('Your Index.html has been created!'))
 };
 
 

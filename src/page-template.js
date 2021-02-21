@@ -11,10 +11,11 @@ function createHTML(employeeList) {
           <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!-- Materialize CSS CDN -->
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-        <!-- Your custom styles -->
-          <link rel="stylesheet" href="./style.css">
-        <!-- Used as an example only to position the footer at the end of the page.
-        You can delete these styles or move it to your custom css file -->
+        <!-- Font Awesome -->
+          <link rel="preconnect" href="https://fonts.gstatic.com" />
+          <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet" />
+          <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+            integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous" />
         <style>
           body {
             display: flex;
@@ -43,8 +44,8 @@ function createHTML(employeeList) {
               <div class="col s12 m6" id="employeeCard">
                 <div class="card blue-grey darken-1">
                   <div class="card-content white-text">
-                    <span class="card-title">${employeeList[0].getName()}</span>
-                    <h5>Manager</h5>
+                    <h4>${employeeList[0].getName()}</h4>
+                    <h5 class="fas fa-tasks"> Manager</h5>
                     <div class="collection">
                       <a href="#!" class="collection-item">ID: ${employeeList[0].getId()}</a>
                       <a href="mailto:${employeeList[0].getEmail()}" target="_blank" class="collection-item">Email: ${employeeList[0].getEmail()}</a>
@@ -79,8 +80,8 @@ function createHTML(employeeList) {
             <div class="col s12 m6" id="employeeCard">
             <div class="card blue-grey darken-1">
               <div class="card-content white-text">
-                <span class="card-title">${employeeList[i].getName()}</span>
-                <h5>${employeeList[i].getRole()}</h5>
+                <h4>${employeeList[i].getName()}</h4>
+                <h5 class="fas fa-user-graduate"> ${employeeList[i].getRole()}</h5>
                 <div class="collection">
                   <a href="#!" class="collection-item">ID: ${employeeList[i].getId()}</a>
                   <a href="mailto:${employeeList[i].getEmail()}" target="_blank" class="collection-item">Email: ${employeeList[i].getEmail()}</a>
@@ -95,8 +96,8 @@ function createHTML(employeeList) {
             <div class="col s12 m6" id="employeeCard">
             <div class="card blue-grey darken-1">
               <div class="card-content white-text">
-                <span class="card-title">${employeeList[i].getName()}</span>
-                <h5>${employeeList[i].getRole()}</h5>
+                <h4> ${employeeList[i].getName()}</h4>
+                <h5 class="fas fa-code"> ${employeeList[i].getRole()}</h5>
                 <div class="collection">
                   <a href="#!" class="collection-item">ID: ${employeeList[i].getId()}</a>
                   <a href="mailto:${employeeList[i].getEmail()}" target="_blank" class="collection-item">Email: ${employeeList[i].getEmail()}</a>
