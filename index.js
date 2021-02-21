@@ -26,7 +26,17 @@ const questions = [
     {
         type: 'input',
         name: 'managerEmail',
-        message: "What is the team manager's Email?"
+        message: "What is the team manager's Email?",
+        validate: function (value) {
+            var pass = value.match(
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            );
+            if (pass) {
+                return true;
+            }
+            
+            return 'Please enter a valid email address'
+        }
     },
     {
         type: 'input',
@@ -56,7 +66,17 @@ const intern = [
     {
         type: 'input',
         name: 'internEmail',
-        message: "What is the Intern's Email?"
+        message: "What is the Intern's Email?",
+        validate: function (value) {
+            var pass = value.match(
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            );
+            if (pass) {
+                return true;
+            }
+            
+            return 'Please enter a valid email address'
+        }
     },
     {
         type: 'input',
@@ -85,7 +105,17 @@ const engineer = [
     {
         type: 'input',
         name: 'engineerEmail',
-        message: "What is the Engineer's Email?"
+        message: "What is the Engineer's Email?",
+        validate: function (value) {
+            var pass = value.match(
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            );
+            if (pass) {
+                return true;
+            }
+            
+            return 'Please enter a valid email address'
+        }
     },
     {
         type: 'input',
