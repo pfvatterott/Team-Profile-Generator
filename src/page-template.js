@@ -1,6 +1,6 @@
 function createHTML(employeeList) {
 
-    let firstHTML = `<!DOCTYPE html>
+  let firstHTML = `<!DOCTYPE html>
     <html lang="en">
       <head>
           <meta charset="UTF-8">
@@ -54,8 +54,8 @@ function createHTML(employeeList) {
                   </div>
                 </div>
               </div>`;
-    
-    let lastHTML = `
+
+  let lastHTML = `
             </div>
             </section>
         </main>
@@ -73,10 +73,11 @@ function createHTML(employeeList) {
         </html>`;
 
 
-    let newCards = [];
-    for (let i = 1; i < employeeList.length; i++) {
-        if (employeeList[i].getRole() === "Intern") {
-            newCards += `
+  // Generates Card for each employee depending on employee type
+  let newCards = [];
+  for (let i = 1; i < employeeList.length; i++) {
+    if (employeeList[i].getRole() === "Intern") {
+      newCards += `
             <div class="col s12 m6" id="employeeCard">
             <div class="card blue-grey darken-1">
               <div class="card-content white-text">
@@ -90,9 +91,9 @@ function createHTML(employeeList) {
               </div>
             </div>
           </div>`;
-        }
-        else if (employeeList[i].getRole() === "Engineer") {
-            newCards += `
+    }
+    else if (employeeList[i].getRole() === "Engineer") {
+      newCards += `
             <div class="col s12 m6" id="employeeCard">
             <div class="card blue-grey darken-1">
               <div class="card-content white-text">
@@ -106,11 +107,11 @@ function createHTML(employeeList) {
               </div>
             </div>
           </div>`;
-        }
-        
     }
 
-    return (firstHTML + newCards + lastHTML)
+  }
+
+  return (firstHTML + newCards + lastHTML)
 
 }
 

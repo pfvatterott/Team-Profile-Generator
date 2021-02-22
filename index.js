@@ -1,3 +1,4 @@
+// Requirements
 const inquirer = require('inquirer');
 const fs = require('fs');
 const { Manager } = require('./lib/employee');
@@ -5,8 +6,7 @@ const { Engineer } = require('./lib/employee');
 const { Intern } = require('./lib/employee');
 const createHTML = require('./src/page-template');
 
-var output = [];
-
+// Questions used by Inquirer NPM
 const questions = [
     {
         type: 'input',
@@ -19,7 +19,6 @@ const questions = [
             if (pass) {
                 return true;
             }
-            
             return 'Please enter both the first name and last name'
         }
     },
@@ -39,7 +38,6 @@ const questions = [
             if (pass) {
                 return true;
             }
-            
             return 'Please enter a valid email address'
         }
     },
@@ -56,6 +54,7 @@ const questions = [
     }
 ];
 
+// Intern Specific Questions used by Inquirer
 const intern = [
     {
         type: 'input',
@@ -68,7 +67,7 @@ const intern = [
             if (pass) {
                 return true;
             }
-            
+
             return 'Please enter both the first name and last name'
         }
     },
@@ -88,7 +87,6 @@ const intern = [
             if (pass) {
                 return true;
             }
-            
             return 'Please enter a valid email address'
         }
     },
@@ -105,6 +103,7 @@ const intern = [
     }
 ];
 
+// Engineer Specific Questions used by Inquirer
 const engineer = [
     {
         type: 'input',
@@ -117,7 +116,6 @@ const engineer = [
             if (pass) {
                 return true;
             }
-            
             return 'Please enter both the first name and last name'
         }
     },
@@ -137,7 +135,6 @@ const engineer = [
             if (pass) {
                 return true;
             }
-            
             return 'Please enter a valid email address'
         }
     },
@@ -152,9 +149,11 @@ const engineer = [
         message: 'Which type of team member would you like to add?',
         choices: ['Intern', 'Engineer', "I don't want to add any more team members"],
     }
-    
+
 ];
 
+// Outputs first series of questions then loops into class specific questions if user selects them.
+let output = [];
 function init(questions) {
     console.log("Let's build your team! First, let's start with the manager.")
     inquirer.prompt(questions).then(answers => {
@@ -170,14 +169,15 @@ function init(questions) {
             newMember = new Manager(output[0].managerName, output[0].managerId, output[0].managerEmail, output[0].managerOffice)
             employeeList.push(newMember);
             writeHTML(employeeList);
-        }   
+        }
     })
-}
+};
 
+// Class specific questions. Then adds each new member to an Employee List Array.
 function classQuestions(questions) {
     inquirer.prompt(questions).then(classAnswers => {
         output.push(classAnswers);
-        if (classAnswers.employeeType === "Intern" ) {
+        if (classAnswers.employeeType === "Intern") {
             classQuestions(intern);
         }
         else if (classAnswers.employeeType === "Engineer") {
@@ -187,30 +187,29 @@ function classQuestions(questions) {
             let newMember;
             let employeeList = [];
             for (let i = 0; i < output.length; i++) {
-                if(output[i].managerName) {
+                if (output[i].managerName) {
                     newMember = new Manager(output[i].managerName, output[i].managerId, output[i].managerEmail, output[i].managerOffice)
                     employeeList.push(newMember);
                 }
-                else if(output[i].internName) {
+                else if (output[i].internName) {
                     newMember = new Intern(output[i].internName, output[i].internId, output[i].internEmail, output[i].internSchool)
                     employeeList.push(newMember);
                 }
-                else if(output[i].engineerName) {
+                else if (output[i].engineerName) {
                     newMember = new Engineer(output[i].engineerName, output[i].engineerId, output[i].engineerEmail, output[i].engineerGithub)
                     employeeList.push(newMember);
                 }
             }
             writeHTML(employeeList)
-            // seems like the html will be generated here.
         }
     })
-}
-
-function writeHTML(employeeList) {
-    fs.writeFile('./dist/index.html', createHTML(employeeList), (err) => 
-    err ? console.error(err) : console.log('Your Index.html has been created!'))
 };
 
+// Uses Employee List array to generate an HTML document
+function writeHTML(employeeList) {
+    fs.writeFile('./dist/index.html', createHTML(employeeList), (err) =>
+        err ? console.error(err) : console.log('Your Index.html has been created!'))
+};
 
 init(questions);
 
