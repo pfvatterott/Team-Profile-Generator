@@ -11,7 +11,17 @@ const questions = [
     {
         type: 'input',
         name: 'managerName',
-        message: "What is the team manager's name?"
+        message: "What is the team manager's name?",
+        validate: function (value) {
+            var pass = value.match(
+                /^\S+\s\S+$/
+            );
+            if (pass) {
+                return true;
+            }
+            
+            return 'Please enter both the first name and last name'
+        }
     },
     {
         type: 'input',
@@ -50,7 +60,17 @@ const intern = [
     {
         type: 'input',
         name: 'internName',
-        message: "What is the Intern's Name?"
+        message: "What is the Intern's Name?",
+        validate: function (value) {
+            var pass = value.match(
+                /^\S+\s\S+$/
+            );
+            if (pass) {
+                return true;
+            }
+            
+            return 'Please enter both the first name and last name'
+        }
     },
     {
         type: 'input',
@@ -89,7 +109,17 @@ const engineer = [
     {
         type: 'input',
         name: 'engineerName',
-        message: "What is the Engineer's Name?"
+        message: "What is the Engineer's Name?",
+        validate: function (value) {
+            var pass = value.match(
+                /^\S+\s\S+$/
+            );
+            if (pass) {
+                return true;
+            }
+            
+            return 'Please enter both the first name and last name'
+        }
     },
     {
         type: 'input',
